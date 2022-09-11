@@ -12,14 +12,25 @@
 
 <body>
 
-	<span id="SUDOKU_CONTAINER" class="centroid"></span>
+	<span class="centroid">
+		<span>0</span>
+		<span id="SUDOKU_CONTAINER"></span>
+
+		<button id="validate" type="button">Validate</button>
+	</span>
 
 	<script type="module">
-		import Sudoku from './Sudoku.js';
+		import Sudoku from './sudoku.js';
 
 		onload = () => {
 			let sudoku = new Sudoku();
 			document.getElementById('SUDOKU_CONTAINER').appendChild(sudoku.board);
+			sudoku.configure('284375196739816254651942378476128539312594687598637412143769825965283741827451963');
+			document.getElementById('validate').onclick = _ => {
+				let validationData = sudoku.validate();
+				console.log(validationData);
+				sudoku.showErrorsForCells(validationData.duplicate);
+			};
 		}
 	</script>
 </body>
